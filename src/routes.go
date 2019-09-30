@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-//Router
+//Router sets application endpoints
 func Router() {
-	http.HandleFunc("/client", HandleClient)
+	http.HandleFunc("/client/", HandleClient)
 }
