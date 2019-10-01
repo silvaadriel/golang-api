@@ -1,0 +1,32 @@
+version: '2.2'
+services:
+  go:
+    extends:
+      file: ./golang/docker-compose.yml
+      service: go
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../src:/go/src/app
+    command: go run .
+    working_dir: /go/src/app
+    networks:
+        - db
+    depends_on:
+      - postgres
+  
+  postgres:
+    extends:
+      file: ./postgres/docker-compose.yml
+      service: postgres
+    networks:
+        - db
+    ports:
+        - "5432:5432"
+    environment:
+        - POSTGRES_PASSWORD=postgres
+    volumes:
+        - ./postgres/var/lib/postgres:/var/lib/postgres
+
+networks:
+  db:
