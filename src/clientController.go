@@ -17,6 +17,8 @@ func HandleClient(responseWriter http.ResponseWriter, request *http.Request) {
 	stringID := strings.TrimPrefix(request.URL.Path, "/client/")
 	ID, _ := strconv.Atoi(stringID)
 
+	enableCors(&responseWriter)
+
 	switch {
 	case request.Method == "GET" && ID > 0:
 		show(responseWriter, request, ID)
