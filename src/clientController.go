@@ -20,6 +20,9 @@ func HandleClient(responseWriter http.ResponseWriter, request *http.Request) {
 	enableCors(&responseWriter)
 
 	switch {
+	case request.Method == "OPTIONS":
+		responseWriter.WriteHeader(http.StatusOK)
+		return
 	case request.Method == "GET" && ID > 0:
 		show(responseWriter, request, ID)
 	case request.Method == "GET":
